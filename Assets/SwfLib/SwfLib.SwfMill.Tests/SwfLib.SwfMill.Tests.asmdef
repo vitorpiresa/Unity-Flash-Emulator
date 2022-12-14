@@ -1,0 +1,18 @@
+{
+    "name": "SwfLib.SwfMill.Tests",
+    "rootNamespace": "",
+    "references": [
+        "GUID:eccd31f53e2696344833be11a37185e9",
+        "GUID:80579e317656c744dbf3dfd56fcd6bdc",
+        "GUID:c63aa913d7973754581564621398ad5b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

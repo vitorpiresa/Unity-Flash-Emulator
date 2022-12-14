@@ -1,0 +1,16 @@
+{
+    "name": "SwfLib.Tests.Asserts",
+    "rootNamespace": "",
+    "references": [
+        "GUID:eccd31f53e2696344833be11a37185e9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
