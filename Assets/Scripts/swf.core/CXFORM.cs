@@ -1,6 +1,6 @@
 namespace Lab5.Swf.Data
 {
-	public struct CXFORM
+	public readonly struct CXFORM
 	{
 		public short RedMultTerm { get; init; }
 		public short GreenMultTerm { get; init; }

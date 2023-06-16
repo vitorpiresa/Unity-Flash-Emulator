@@ -1,19 +1,28 @@
 
-## :white_check_mark: Chapter 1
+#### :white_check_mark: Chapter 1 - Basic Data Types
 
 - [x] Mvp completed
 - [ ] UI24 implementation
 - [ ] FLOAT16 implementation
-- [ ] Bit reading needs rework
 - [ ] Structured types needs testing
 
-## :negative_squared_cross_mark: Chapter 2
+Post MVP:
+- [ ] Rework bit reading algorithm
 
-- [ ] Decompression support
-- [ ] HEADER reading
-- [ ] TAG list
-- [ ] Definition Tags dictionary
-- [ ] Control tags
+
+#### :white_check_mark: Chapter 2 - SWF Structure Summary
+
+- [x] ZLIB Decompression
+- [x] LZMA Decompression
+- [x] HEADER reading
+- [x] TAG list
+- [x] Definition Tags dictionary
+- [x] Control Tags list
+
+Post MVP:
+- [ ] Better ZLIB Decompression
+- [ ] Better LZMA Decompression
+- [ ] Better stream readers
 
 #### :x: Chapter 3
 #### :x: Chapter 4
@@ -27,4 +36,5 @@
 #### :x: Chapter 12
 #### :x: Chapter 13
 #### :x: Chapter 14
-#### :x: Chapter 15
+
+#### :negative_squared_cross_mark: Chapter 15

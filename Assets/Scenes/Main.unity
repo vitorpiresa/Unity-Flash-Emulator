@@ -670,7 +670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3098e3a36b1495949a5ce22300a1f340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Path: AM0101CI-05.swf
+  m_Path: AM0101CI-06.swf
 --- !u!1 &2115690631
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
-namespace Lab5.Swf.Data
+namespace Lab5.Swf.Enums
 {
-	public enum LANGCODE : byte
+	public enum LanguageCode
 	{
 		NoLanguage = 0,
 		Latin = 1,

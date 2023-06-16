@@ -1,6 +1,6 @@
 namespace Lab5.Swf.Data
 {
-	public struct MATRIX
+	public readonly struct MATRIX
 	{
 		public float ScaleX { get; init; }
 		public float ScaleY { get; init; }
