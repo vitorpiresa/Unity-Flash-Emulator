@@ -8,5 +8,8 @@ namespace Lab5.Swf.Data
 		public float RotateSkew1 { get; init; }
 		public int TranslateX { get; init; }
 		public int TranslateY { get; init; }
+
+		public static MATRIX Identity => new() { ScaleX = 1, ScaleY = 1 };
+		public static MATRIX Zero => default;
 	}
 }

@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using Lab5.Swf.Tags;
 using Lab5.Swf.Data;
 using Lab5.Swf.Enums;
 using Lab5.Swf.Streams;
@@ -73,8 +74,14 @@ namespace Lab5.Swf
 				var reader = new SwfTagReader(new MemoryStream(buffer));
 				var tag = ReadTag(reader, record);
 
-				if (tag != null && !reader.EndOfStream)
-					UnityEngine.Debug.LogWarning($"Uncomplete tag reading on tag number {index}.");
+				if (tag is null)
+				{
+					UnityEngine.Debug.LogWarning($"Unknown tag type: {record.Type}");
+					continue;
+				}
+
+				if (!reader.EndOfStream)
+					UnityEngine.Debug.LogWarning($"Uncomplete tag reading on tag {tag.GetType().Name} number {index}.");
 
 				if (tag is IDefinitionTag defineTag)
 					m_Dictionary.Add(defineTag.ID, defineTag);
@@ -85,11 +92,24 @@ namespace Lab5.Swf
 
 		private ITag ReadTag(SwfTagReader reader, RECORDHEADER header)
 		{
-			if (header.Type == 69)
-				return reader.ReadFileAttributes();
-
-			UnityEngine.Debug.LogWarning($"Unknown tag type: {header.Type}");
-			return null;
+			try
+			{
+				if (header.Type == 4)
+					return reader.ReadPlaceObject();
+				else if (header.Type == 26)
+					return reader.ReadPlaceObject2();
+				else if (header.Type == 69)
+					return reader.ReadFileAttributes();
+				else if (header.Type == 70)
+					return reader.ReadPlaceObject3();
+				else
+					return null;
+			}
+			catch
+			{
+				UnityEngine.Debug.Log("Corrupted tag reading");
+				return null;
+			}
 		}
 
 		public void Dispose()

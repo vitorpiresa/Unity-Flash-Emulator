@@ -14,6 +14,8 @@ namespace Lab5.Swf
 			Application.targetFrameRate = 20;
 		}
 
+		void OnMouseUpAsButton() => Load();
+
 		public void Load()
 		{
 			var path = Path.Combine(Application.streamingAssetsPath, m_Path);

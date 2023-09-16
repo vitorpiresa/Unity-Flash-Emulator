@@ -24,7 +24,16 @@ Post MVP:
 - [ ] Better LZMA Decompression
 - [ ] Better stream readers
 
-#### :x: Chapter 3
+#### :x: Chapter 3: The Display List
+
+- [ ] PlaceObject tag
+- [ ] PlaceObject2 tag
+- [ ] PlaceObject3 tag
+- [ ] RemoveObject tag
+- [ ] RemoveObject2 tag
+- [ ] ShowFrame tag
+- [ ] Filters data
+
 #### :x: Chapter 4
 #### :x: Chapter 5
 #### :x: Chapter 6
