@@ -7,7 +7,7 @@ namespace Lab5.Swf.Streams
 	public class SwfTagReader : SwfDataReader
 	{
 		public SwfTagReader(System.IO.Stream input) : base(input) { }
-		
+
 		// 4 - PlaceObject
 		public PlaceObjectTag ReadPlaceObject()
 		{
@@ -36,6 +36,15 @@ namespace Lab5.Swf.Streams
 			};
 		}
 
+		// 5 - RemoveObject
+		public RemoveObject ReadRemoveObject()
+		{
+			var characterID = ReadUI16();
+			var depth = ReadUI16();
+
+			return new(characterID, depth);
+		}
+
 		// 26 - PlaceObject2
 		public PlaceObjectTag ReadPlaceObject2()
 		{
@@ -61,6 +70,14 @@ namespace Lab5.Swf.Streams
 			};
 		}
 
+		// 28 - RemoveObject2
+		public RemoveObject ReadRemoveObject2()
+		{
+			var depth = ReadUI16();
+
+			return new(default, depth);
+		}
+
 		// 69 - FileAttributes
 		public FileAttributes ReadFileAttributes()
 		{
@@ -71,7 +88,7 @@ namespace Lab5.Swf.Streams
 				Flags = flags
 			};
 		}
-		
+
 		// 70 - PlaceObject3
 		public PlaceObjectTag ReadPlaceObject3()
 		{

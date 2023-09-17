@@ -29,8 +29,8 @@ Post MVP:
 - [ ] PlaceObject tag
 - [ ] PlaceObject2 tag
 - [ ] PlaceObject3 tag
-- [ ] RemoveObject tag
-- [ ] RemoveObject2 tag
+- [x] RemoveObject tag
+- [x] RemoveObject2 tag
 - [ ] ShowFrame tag
 - [ ] Filters data
 

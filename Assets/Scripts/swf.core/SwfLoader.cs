@@ -96,8 +96,12 @@ namespace Lab5.Swf
 			{
 				if (header.Type == 4)
 					return reader.ReadPlaceObject();
+				else if (header.Type == 5)
+					return reader.ReadRemoveObject();
 				else if (header.Type == 26)
 					return reader.ReadPlaceObject2();
+				else if (header.Type == 28)
+					return reader.ReadRemoveObject2();
 				else if (header.Type == 69)
 					return reader.ReadFileAttributes();
 				else if (header.Type == 70)
