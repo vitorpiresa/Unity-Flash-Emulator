@@ -11,7 +11,7 @@ namespace Lab5.Swf.Data
 		public short BlueAddTerm { get; init; }
 		public short AlphaAddTerm { get; init; }
 
-		public static CXFORM Identity => new() { RedAddTerm = 0x100, GreenMultTerm = 0x100, BlueMultTerm = 0x100, AlphaMultTerm = 0x100 };
+		public static CXFORM Identity => new() { RedMultTerm = 0x100, GreenMultTerm = 0x100, BlueMultTerm = 0x100, AlphaMultTerm = 0x100 };
 		public static CXFORM Zero => default;
 	}
 }
