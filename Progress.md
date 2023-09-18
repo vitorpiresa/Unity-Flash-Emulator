@@ -1,5 +1,5 @@
 
-#### :white_check_mark: Chapter 1 - Basic Data Types
+### Chapter 1 - Basic Data Types
 
 - [x] Mvp completed
 - [ ] UI24 implementation
@@ -10,7 +10,7 @@ Post MVP:
 - [ ] Rework bit reading algorithm
 
 
-#### :white_check_mark: Chapter 2 - SWF Structure Summary
+### Chapter 2 - SWF Structure Summary
 
 - [x] ZLIB Decompression
 - [x] LZMA Decompression
@@ -24,26 +24,43 @@ Post MVP:
 - [ ] Better LZMA Decompression
 - [ ] Better stream readers
 
-#### :x: Chapter 3: The Display List
+### Chapter 3: The Display List
 
-- [ ] PlaceObject tag
-- [ ] PlaceObject2 tag
-- [ ] PlaceObject3 tag
-- [x] RemoveObject tag
-- [x] RemoveObject2 tag
-- [x] ShowFrame tag
+- [x] PlaceObject <sub>(partial)</sub>
+- [x] PlaceObject2 <sub>(partial)</sub>
+- [x] PlaceObject3 <sub>(partial)</sub>
+- [x] RemoveObject
+- [x] RemoveObject2
+- [x] ShowFrame
 - [ ] Filters data
 
-#### :x: Chapter 4
-#### :x: Chapter 5
-#### :x: Chapter 6
-#### :x: Chapter 7
-#### :x: Chapter 8
-#### :x: Chapter 9
-#### :x: Chapter 10
-#### :x: Chapter 11
-#### :x: Chapter 12
-#### :x: Chapter 13
-#### :x: Chapter 14
+### :x: Chapter 4: Control Tags
 
-#### :negative_squared_cross_mark: Chapter 15
+- [ ] SetBackgroundColor
+- [ ] FrameLabel
+- [ ] Protect
+- [ ] End
+- [ ] ExportAssets
+- [ ] ImportAssets
+- [ ] EnableDebugger
+- [ ] EnableDebugger2
+- [ ] ScriptLimits
+- [ ] SetTabIndex
+- [ ] FileAttributes
+- [ ] ImportAssets2
+- [ ] SymbolClass
+- [ ] Metadata
+- [ ] DefineScalingGrid
+- [ ] DefineSceneAndFrameLabelData
+
+### :x: Chapter 5: Actions
+### :x: Chapter 6: Shapes
+### :x: Chapter 7: Gradients
+### :x: Chapter 8: Bitmaps
+### :x: Chapter 9: Shape Morphing
+### :x: Chapter 10: Fonts and Text
+### :x: Chapter 11: Sounds
+### :x: Chapter 12: Buttons
+### :x: Chapter 13: Sprites and Movie Clips
+### :x: Chapter 14: Video
+### :x: Chapter 15: Metadata
