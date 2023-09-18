@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
-using Lab5.Swf.Tags;
 using Lab5.Swf.Data;
 using Lab5.Swf.Enums;
 using Lab5.Swf.Streams;
@@ -94,7 +93,9 @@ namespace Lab5.Swf
 		{
 			try
 			{
-				if (header.Type == 4)
+				if (header.Type == 1)
+					return reader.ReadShowFrame();
+				else if (header.Type == 4)
 					return reader.ReadPlaceObject();
 				else if (header.Type == 5)
 					return reader.ReadRemoveObject();

@@ -31,7 +31,7 @@ Post MVP:
 - [ ] PlaceObject3 tag
 - [x] RemoveObject tag
 - [x] RemoveObject2 tag
-- [ ] ShowFrame tag
+- [x] ShowFrame tag
 - [ ] Filters data
 
 #### :x: Chapter 4

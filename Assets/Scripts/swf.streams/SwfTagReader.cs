@@ -8,6 +8,12 @@ namespace Lab5.Swf.Streams
 	{
 		public SwfTagReader(System.IO.Stream input) : base(input) { }
 
+		// 1 - ShowFrame
+		public ShowFrame ReadShowFrame()
+		{
+			return new();
+		}
+
 		// 4 - PlaceObject
 		public PlaceObjectTag ReadPlaceObject()
 		{
