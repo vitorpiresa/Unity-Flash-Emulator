@@ -37,7 +37,7 @@ namespace Lab5.Swf.Streams
 		public RECORDHEADER ReadRECORDHEADER()
 		{
 			var TagCodeAndLength = ReadUI16();
-			var Type = (ushort)(TagCodeAndLength >> 6);
+			var Type = (TagType)(TagCodeAndLength >> 6);
 			var Lenght = (TagCodeAndLength & 0x3Fu) == 0x3Fu ? ReadUI32() : TagCodeAndLength & 0x3Fu;
 			var Offset = BaseStream.Position;
 

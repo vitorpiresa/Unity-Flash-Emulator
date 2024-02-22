@@ -12,6 +12,8 @@ namespace Lab5.Swf
 		void Awake()
 		{
 			Application.targetFrameRate = 20;
+			Debug.developerConsoleEnabled = true;
+			Debug.developerConsoleVisible = true; 
 		}
 
 		void OnMouseUpAsButton() => Load();
@@ -19,10 +21,15 @@ namespace Lab5.Swf
 		public void Load()
 		{
 			var path = Path.Combine(Application.streamingAssetsPath, m_Path);
+			print(m_Path);
+			print(path);
+
+			//ILogger
+			//ILogHandler
 
 			using (var loader = new SwfLoader(path))
 			{
-				
+
 			}
 		}
 	}

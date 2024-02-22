@@ -1,0 +1,16 @@
+{
+    "name": "Lab5.Flash",
+    "rootNamespace": "",
+    "references": [
+        "GUID:c2756c51b2061fb479dbfb6b3ed4da3a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -7,7 +7,7 @@ namespace Lab5.Swf.Tags
 	// PlaceObject 	=> 4
 	// PlaceObject2 => 26
 	// PlaceObject3 => 70
-	public readonly struct PlaceObjectTag : ITag
+	public readonly struct PlaceObject : ITag
 	{
 		public PlaceFlags Flags { get; init; }
 		public ushort Depth { get; init; }
@@ -26,3 +26,5 @@ namespace Lab5.Swf.Tags
 		// ClipActions -> PlaceObject2
 	}
 }
+
+public record Placer();

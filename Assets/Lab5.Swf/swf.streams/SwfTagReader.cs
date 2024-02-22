@@ -3,10 +3,17 @@ namespace Lab5.Swf.Streams
 	using Data;
 	using Tags;
 	using Enums;
+	using System;
 
 	public class SwfTagReader : SwfDataReader
 	{
 		public SwfTagReader(System.IO.Stream input) : base(input) { }
+
+		// 0 - End
+		public End ReadEnd()
+		{
+			return new();
+		}
 
 		// 1 - ShowFrame
 		public ShowFrame ReadShowFrame()
@@ -15,14 +22,14 @@ namespace Lab5.Swf.Streams
 		}
 
 		// 4 - PlaceObject
-		public PlaceObjectTag ReadPlaceObject()
+		public PlaceObject ReadPlaceObject()
 		{
 			var characterID = ReadUI16();
 			var depth = ReadUI16();
 			var matrix = ReadMATRIX();
 			var colorTransform = EndOfStream ? CXFORM.Identity : ReadCXFORM();
 
-			return new PlaceObjectTag()
+			return new PlaceObject()
 			{
 				Flags = default,
 				Depth = depth,
@@ -51,8 +58,28 @@ namespace Lab5.Swf.Streams
 			return new(characterID, depth);
 		}
 
+		// 9 - SetBackgroundColor
+		public SetBackgroundColor ReadSetBackgroundColor()
+		{
+			var backgroundColor = ReadRGB();
+			return new()
+			{
+				BackgroundColor = backgroundColor
+			};
+		}
+
+		// 24 - Protect
+		public Protect ReadProtect()
+		{
+			var password = EndOfStream ? null : ReadUI8(BaseStream.Length - BaseStream.Position);
+			return new()
+			{
+				Password = password
+			};
+		}
+
 		// 26 - PlaceObject2
-		public PlaceObjectTag ReadPlaceObject2()
+		public PlaceObject ReadPlaceObject2()
 		{
 			var flags = (PlaceFlags)ReadUI8();
 			var depth = ReadUI16();
@@ -84,6 +111,38 @@ namespace Lab5.Swf.Streams
 			return new(default, depth);
 		}
 
+		// 43 - FrameLabel
+		public FrameLabel ReadFrameLabel()
+		{
+			var name = ReadSTRING();
+			var namedAnchor = EndOfStream ? (byte)0 : ReadUI8();
+
+			return new()
+			{
+				Name = name,
+				NamedAnchor = namedAnchor
+			};
+		}
+
+		// 56 - ExportAssets
+		public ExportAssets ReadExportAssets()
+		{
+			var count = ReadUI16();
+			var tags = new ushort[count];
+			var names = new string[count];
+			for (int c = 0; c < count; c++)
+			{
+				tags[c] = ReadUI16();
+				names[c] = ReadSTRING();
+			}
+			return new()
+			{
+				Count = count,
+				Tags = Array.AsReadOnly(tags),
+				Names = Array.AsReadOnly(names)
+			};
+		}
+
 		// 69 - FileAttributes
 		public FileAttributes ReadFileAttributes()
 		{
@@ -96,7 +155,7 @@ namespace Lab5.Swf.Streams
 		}
 
 		// 70 - PlaceObject3
-		public PlaceObjectTag ReadPlaceObject3()
+		public PlaceObject ReadPlaceObject3()
 		{
 			var flags = (PlaceFlags)ReadUI16();
 			var depth = ReadUI16();

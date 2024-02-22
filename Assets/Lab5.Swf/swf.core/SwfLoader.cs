@@ -75,12 +75,12 @@ namespace Lab5.Swf
 
 				if (tag is null)
 				{
-					UnityEngine.Debug.LogWarning($"Unknown tag type: {record.Type}");
+					//UnityEngine.Debug.LogWarning($"Unknown tag type: {record.Type}");
 					continue;
 				}
 
-				if (!reader.EndOfStream)
-					UnityEngine.Debug.LogWarning($"Uncomplete tag reading on tag {tag.GetType().Name} number {index}.");
+				if (!reader.EndOfStream) { }
+				//UnityEngine.Debug.LogWarning($"Uncomplete tag reading on tag {record.Type} number {index}.");
 
 				if (tag is IDefinitionTag defineTag)
 					m_Dictionary.Add(defineTag.ID, defineTag);
@@ -93,26 +93,34 @@ namespace Lab5.Swf
 		{
 			try
 			{
-				if (header.Type == 1)
+				if (header.Type == TagType.End)
+					return reader.ReadEnd();
+				else if (header.Type == TagType.ShowFrame)
 					return reader.ReadShowFrame();
-				else if (header.Type == 4)
+				else if (header.Type == TagType.PlaceObject)
 					return reader.ReadPlaceObject();
-				else if (header.Type == 5)
+				else if (header.Type == TagType.RemoveObject)
 					return reader.ReadRemoveObject();
-				else if (header.Type == 26)
+				else if (header.Type == TagType.SetBackgroundColor)
+					return reader.ReadSetBackgroundColor();
+				else if (header.Type == TagType.Protect)
+					return reader.ReadProtect();
+				else if (header.Type == TagType.PlaceObject2)
 					return reader.ReadPlaceObject2();
-				else if (header.Type == 28)
+				else if (header.Type == TagType.RemoveObject2)
 					return reader.ReadRemoveObject2();
-				else if (header.Type == 69)
+				else if (header.Type == TagType.FrameLabel)
+					return reader.ReadFrameLabel();
+				else if (header.Type == TagType.FileAttributes)
 					return reader.ReadFileAttributes();
-				else if (header.Type == 70)
+				else if (header.Type == TagType.PlaceObject3)
 					return reader.ReadPlaceObject3();
 				else
 					return null;
 			}
 			catch
 			{
-				UnityEngine.Debug.Log("Corrupted tag reading");
+				//UnityEngine.Debug.Log("Corrupted tag reading");
 				return null;
 			}
 		}
