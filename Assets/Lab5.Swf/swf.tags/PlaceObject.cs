@@ -18,13 +18,11 @@ namespace Lab5.Swf.Tags
 		public ushort Ratio { get; init; }
 		public string Name { get; init; }
 		public ushort ClipDepth { get; init; }
-		// SurfaceFilterList
-		// BlendMode
-		// BitmapCache
-		// Visible
-		// BackgroundColor
-		// ClipActions -> PlaceObject2
+		public FILTERLIST SurfaceFilterList { get; init; }
+		public BlendMode BlendMode { get; init; }
+		public byte BitmapCache { get; init; }
+		public byte Visible { get; init; }
+		public RGBA BackgroundColor { get; init; }
+		public CLIPACTIONS ClipActions { get; init; }
 	}
 }
-
-public record Placer();

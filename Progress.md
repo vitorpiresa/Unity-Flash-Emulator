@@ -26,13 +26,30 @@ Post MVP:
 
 ### Chapter 3: The Display List
 
-- [x] PlaceObject <sub>(partial)</sub>
-- [x] PlaceObject2 <sub>(partial)</sub>
-- [x] PlaceObject3 <sub>(partial)</sub>
+Tags:
+- [x] PlaceObject
+- [x] PlaceObject2
+- [x] PlaceObject3
 - [x] RemoveObject
 - [x] RemoveObject2
 - [x] ShowFrame
-- [ ] Filters data
+
+Filters:
+- [x] DROPSHADOWFILTER
+- [x] BLURFILTER
+- [x] GLOWFILTER
+- [x] BEVELFILTER
+- [x] GRADIENTGLOWFILTER
+- [x] CONVOLUTIONFILTER
+- [x] COLORMATRIXFILTER
+- [x] GRADIENTBEVELFILTER
+
+Data:
+- [x] CLIPACTIONS
+- [x] CLIPACTIONRECORD
+- [x] FILTERLIST
+- [x] FILTER
+- [x] CLIPEVENTFLAGS
 
 ### :x: Chapter 4: Control Tags
 
