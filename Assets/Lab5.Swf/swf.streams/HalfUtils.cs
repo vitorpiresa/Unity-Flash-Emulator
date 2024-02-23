@@ -1,3 +1,5 @@
+using System;
+
 public static class HalfUtils
 {
 	private static uint select(uint a, uint b, bool c)
@@ -7,10 +9,7 @@ public static class HalfUtils
 
 	private static float asfloat(int x)
 	{
-		unsafe
-		{
-			return *(float*)&x;
-		}
+		return BitConverter.Int32BitsToSingle(x);
 	}
 
 	private static float asfloat(uint x)
@@ -20,10 +19,7 @@ public static class HalfUtils
 
 	private static uint asuint(float x)
 	{
-		unsafe
-		{
-			return *(uint*)&x;
-		}
+		return (uint)BitConverter.SingleToInt32Bits(x);
 	}
 
 	public static float f16tof32(uint x)

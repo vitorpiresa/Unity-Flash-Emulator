@@ -264,10 +264,7 @@ namespace Lab5.Swf
 				var b2 = ReadByte();
 				var b3 = ReadByte();
 				var value = b0 | b1 << 8 | b2 << 16 | b3 << 24;
-				unsafe
-				{
-					return *(float*)&value;
-				}
+				return BitConverter.Int32BitsToSingle(value);
 			}
 		}
 
@@ -277,7 +274,8 @@ namespace Lab5.Swf
 			{
 				var lo = (uint)(ReadByte() | ReadByte() << 8 | ReadByte() << 16 | ReadByte() << 24);
 				var hi = (uint)(ReadByte() | ReadByte() << 8 | ReadByte() << 16 | ReadByte() << 24);
-				return ((long)hi) << 32 | lo;
+				var value = ((long)hi) << 32 | lo;
+				return BitConverter.Int64BitsToDouble(value);
 			}
 		}
 
@@ -358,7 +356,7 @@ namespace Lab5.Swf
 			{
 				if (bt > 0)
 					stream.WriteByte(bt);
-			} 
+			}
 			return m_Encoding.GetString(stream.ToArray());
 		}
 
