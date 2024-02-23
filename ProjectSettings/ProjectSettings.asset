@@ -161,7 +161,9 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
+    Android: com.DefaultCompany.UFE2
     Standalone: com.DefaultCompany.UFE2
+    iPhone: com.DefaultCompany.UFE2
   buildNumber:
     Standalone: 0
     VisionOS: 0
