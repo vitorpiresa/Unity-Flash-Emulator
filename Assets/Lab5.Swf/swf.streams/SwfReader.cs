@@ -9,167 +9,299 @@ namespace Lab5.Swf
 {
 	public class SwfReader : IDisposable, ISwfReader
 	{
-		private BinaryReader m_Reader;
+		private Stream m_Stream;
 		private Encoding m_Encoding;
 		private byte m_BitIndex;
 		private byte m_BitValue;
 
-		public Stream BaseStream => m_Reader.BaseStream;
+		public Stream BaseStream => m_Stream;
 		public Encoding CurrentEncoding => m_Encoding;
-		public bool EndOfStream => m_Reader.BaseStream.Position == m_Reader.BaseStream.Length;
+		public bool EndOfStream => m_Stream.Position == m_Stream.Length;
 
 		public SwfReader(Stream input)
 		{
+			m_Stream = input;
 			m_Encoding = Encoding.UTF8;
-			m_Reader = new BinaryReader(input, m_Encoding, false);
 			m_BitIndex = 0;
 			m_BitValue = 0;
 		}
 
 		public virtual void Dispose()
 		{
-			m_Reader.Dispose();
+			m_Stream.Dispose();
+		}
+
+		private byte ReadByte()
+		{
+			var value = m_Stream.ReadByte();
+			if (value == -1)
+				throw new EndOfStreamException("Unable to read beyond the end of the stream.");
+			return (byte)value;
 		}
 
 		// Integer types
 		public sbyte ReadSI8()
 		{
-			return m_Reader.ReadSByte();
+			unchecked
+			{
+				return (sbyte)ReadByte();
+			}
 		}
 
 		public short ReadSI16()
 		{
-			return m_Reader.ReadInt16();
+			unchecked
+			{
+				var b0 = ReadByte();
+				var b1 = ReadByte();
+				return (short)(b0 | b1 << 8);
+			}
 		}
 
 		public int ReadSI24()
 		{
-			return (int)(m_Reader.ReadByte() | m_Reader.ReadByte() << 8 | m_Reader.ReadByte() << 16);
+			unchecked
+			{
+				var b0 = ReadByte();
+				var b1 = ReadByte();
+				var b2 = ReadByte();
+				return b0 | b1 << 8 | b2 << 16;
+			}
 		}
 
 		public int ReadSI32()
 		{
-			return m_Reader.ReadInt32();
+			unchecked
+			{
+				var b0 = ReadByte();
+				var b1 = ReadByte();
+				var b2 = ReadByte();
+				var b3 = ReadByte();
+				return b0 | b1 << 8 | b2 << 16 | b3 << 24;
+			}
 		}
 
 		public sbyte[] ReadSI8(long n)
 		{
-			var value = new sbyte[n];
-			for (int c = 0; c < n; c++)
-				value[c] = m_Reader.ReadSByte();
-			return value;
+			unchecked
+			{
+				var value = new sbyte[n];
+				for (long c = 0; c < n; c++)
+					value[c] = (sbyte)ReadByte();
+				return value;
+			}
 		}
 
 		public short[] ReadSI16(long n)
 		{
-			var value = new short[n];
-			for (int c = 0; c < n; c++)
-				value[c] = m_Reader.ReadInt16();
-			return value;
+			unchecked
+			{
+				var value = new short[n];
+				for (int c = 0; c < n; c++)
+				{
+					var b0 = ReadByte();
+					var b1 = ReadByte();
+					value[c] = (short)(b0 | b1 << 8);
+				}
+				return value;
+			}
 		}
 
 		public byte ReadUI8()
 		{
-			return m_Reader.ReadByte();
+			unchecked
+			{
+				return ReadByte();
+			}
 		}
 
 		public ushort ReadUI16()
 		{
-			return m_Reader.ReadUInt16();
+			unchecked
+			{
+				var b0 = ReadByte();
+				var b1 = ReadByte();
+				return (ushort)(b0 | b1 << 8);
+			}
 		}
 
 		public uint ReadUI24()
 		{
-			return (uint)(m_Reader.ReadByte() | m_Reader.ReadByte() << 8 | m_Reader.ReadByte() << 16);
+			unchecked
+			{
+				var b0 = ReadByte();
+				var b1 = ReadByte();
+				var b2 = ReadByte();
+				return (uint)(b0 | b1 << 8 | b2 << 16);
+			}
 		}
 
 		public uint ReadUI32()
 		{
-			return m_Reader.ReadUInt32();
+			unchecked
+			{
+				var b0 = ReadByte();
+				var b1 = ReadByte();
+				var b2 = ReadByte();
+				var b3 = ReadByte();
+				return (uint)(b0 | b1 << 8 | b2 << 16 | b3 << 24);
+			}
 		}
 
 		public byte[] ReadUI8(long n)
 		{
-			return m_Reader.ReadBytes((int)n);
+			unchecked
+			{
+				var value = new byte[n];
+				for (long c = 0; c < n; c++)
+					value[c] = ReadByte();
+				return value;
+			}
 		}
 
 		public ushort[] ReadUI16(long n)
 		{
-			var value = new ushort[n];
-			for (int c = 0; c < n; c++)
-				value[c] = m_Reader.ReadUInt16();
-			return value;
+			unchecked
+			{
+				var value = new ushort[n];
+				for (long c = 0; c < n; c++)
+				{
+					var b0 = ReadByte();
+					var b1 = ReadByte();
+					value[c] = (ushort)(b0 | b1 << 8);
+				}
+				return value;
+			}
 		}
 
 		public uint[] ReadUI24(long n)
 		{
-			throw new NotImplementedException();
+			unchecked
+			{
+				var value = new uint[n];
+				for (long c = 0; c < n; c++)
+				{
+					var b0 = ReadByte();
+					var b1 = ReadByte();
+					var b2 = ReadByte();
+					value[c] = (uint)(b0 | b1 << 8 | b2 << 16);
+				}
+				return value;
+			}
 		}
 
 		public uint[] ReadUI32(long n)
 		{
-			var value = new uint[n];
-			for (int c = 0; c < n; c++)
-				value[c] = m_Reader.ReadUInt32();
-			return value;
+			unchecked
+			{
+				var value = new uint[n];
+				for (int c = 0; c < n; c++)
+				{
+					var b0 = ReadByte();
+					var b1 = ReadByte();
+					var b2 = ReadByte();
+					var b3 = ReadByte();
+					value[c] = (uint)(b0 | b1 << 8 | b2 << 16 | b3 << 24);
+				}
+				return value;
+			}
 		}
 
 		public ulong[] ReadUI64(long n)
 		{
-			var value = new ulong[n];
-			for (int c = 0; c < n; c++)
-				value[c] = m_Reader.ReadUInt64();
-			return value;
+			unchecked
+			{
+				var value = new ulong[n];
+				for (int c = 0; c < n; c++)
+				{
+					var lo = (uint)(ReadByte() | ReadByte() << 8 | ReadByte() << 16 | ReadByte() << 24);
+					var hi = (uint)(ReadByte() | ReadByte() << 8 | ReadByte() << 16 | ReadByte() << 24);
+					value[c] = ((ulong)hi) << 32 | lo;
+				}
+				return value;
+			}
 		}
 
 		// Fixed-point numbers
 		public float ReadFIXED()
 		{
-			return m_Reader.ReadInt32() / 65536f;
+			unchecked
+			{
+				var b0 = ReadByte();
+				var b1 = ReadByte();
+				var b2 = ReadByte();
+				var b3 = ReadByte();
+				return (b0 | b1 << 8 | b2 << 16 | b3 << 24) / 65536f;
+			}
 		}
 
 		public float ReadFIXED8()
 		{
-			return m_Reader.ReadInt16() / 256f;
+			unchecked
+			{
+				var b0 = ReadByte();
+				var b1 = ReadByte();
+				return (b0 << b1 | 8) / 256f;
+			}
 		}
 
-		// Floating-point numbers
 		public float ReadFLOAT16()
 		{
-			throw new NotImplementedException();
+			unchecked
+			{
+				var b0 = ReadByte();
+				var b1 = ReadByte();
+				return HalfUtils.f16tof32((uint)(b0 | b1 << 8));
+			}
 		}
 
 		public float ReadFLOAT()
 		{
-			return m_Reader.ReadSingle();
+			unchecked
+			{
+				var b0 = ReadByte();
+				var b1 = ReadByte();
+				var b2 = ReadByte();
+				var b3 = ReadByte();
+				var value = b0 | b1 << 8 | b2 << 16 | b3 << 24;
+				unsafe
+				{
+					return *(float*)&value;
+				}
+			}
 		}
 
 		public double ReadDOUBLE()
 		{
-			return m_Reader.ReadDouble();
+			unchecked
+			{
+				var lo = (uint)(ReadByte() | ReadByte() << 8 | ReadByte() << 16 | ReadByte() << 24);
+				var hi = (uint)(ReadByte() | ReadByte() << 8 | ReadByte() << 16 | ReadByte() << 24);
+				return ((long)hi) << 32 | lo;
+			}
 		}
 
 		// Encoded integers
 		public uint ReadEncodedU32()
 		{
 			uint val = 0;
-			var bt = m_Reader.ReadByte();
+			var bt = ReadByte();
 			val |= bt & 0x7fu;
 			if ((bt & 0x80) == 0) return val;
 
-			bt = m_Reader.ReadByte();
+			bt = ReadByte();
 			val |= (bt & 0x7fu) << 7;
 			if ((bt & 0x80) == 0) return val;
 
-			bt = m_Reader.ReadByte();
+			bt = ReadByte();
 			val |= (bt & 0x7fu) << 14;
 			if ((bt & 0x80) == 0) return val;
 
-			bt = m_Reader.ReadByte();
+			bt = ReadByte();
 			val |= (bt & 0x7fu) << 21;
 			if ((bt & 0x80) == 0) return val;
 
-			bt = m_Reader.ReadByte();
+			bt = ReadByte();
 			val |= (bt & 0x7fu) << 28;
 			return val;
 		}
@@ -179,7 +311,7 @@ namespace Lab5.Swf
 		{
 			var bitIndex = m_BitIndex & 0x07;
 			if (bitIndex == 0)
-				m_BitValue = m_Reader.ReadByte();
+				m_BitValue = ReadByte();
 			m_BitIndex++;
 			return ((m_BitValue << bitIndex) & 0x80) != 0;
 		}
@@ -221,12 +353,12 @@ namespace Lab5.Swf
 		public string ReadSTRING()
 		{
 			var stream = new MemoryStream();
-			byte bt = 1;
-			while ((bt = m_Reader.ReadByte()) > 0)
+			byte bt;
+			while ((bt = ReadByte()) > 0)
 			{
 				if (bt > 0)
 					stream.WriteByte(bt);
-			}
+			} 
 			return m_Encoding.GetString(stream.ToArray());
 		}
 
@@ -344,7 +476,7 @@ namespace Lab5.Swf
 			var RedAddTerm = 0;
 			var GreenAddTerm = 0;
 			var BlueAddTerm = 0;
-			
+
 			if (HasAddTerms)
 			{
 				RedAddTerm = ReadSB(Nbits);
