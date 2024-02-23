@@ -31,6 +31,13 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 
+      # Output
+      - name: Cache changes
+        uses: actions/upload-artifact@v4
+        with:
+          name: ProjectSettings
+          path: ProjectSettings
+
       # Build
       - name: Build project
         uses: game-ci/unity-builder@v4
