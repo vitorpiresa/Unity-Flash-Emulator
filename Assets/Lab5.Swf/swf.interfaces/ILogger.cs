@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-
+using System;
 
 namespace Lab5.Swf.Interfaces
 {
-	public class ILogger
+	public interface ILogger
 	{
-		
+		void LogError(object message);
+		void LogAssert(object message);
+		void LogWarning(object message);
+		void Log(object message);
+		void LogException(Exception exception);
 	}
 }

@@ -71,7 +71,7 @@ namespace Lab5.Swf.Streams
 		// 24 - Protect
 		public Protect ReadProtect()
 		{
-			var password = EndOfStream ? null : ReadUI8(BaseStream.Length - BaseStream.Position);
+			var password = EndOfStream ? null : ReadMany(ReadUI8, (int)(BaseStream.Length - BaseStream.Position));
 			return new()
 			{
 				Password = password

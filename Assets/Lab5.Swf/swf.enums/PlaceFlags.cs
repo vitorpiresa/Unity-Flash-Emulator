@@ -13,5 +13,12 @@ namespace Lab5.Swf.Enums
 		HasName = 0x20,
 		HasClipDepth = 0x40,
 		HasClipActions = 0x80,
+		HasFilterList = 0x100,
+		HasBlendMode = 0x200,
+		CacheAsBitmap = 0x400,
+		HasClassName = 0x800,
+		HasImage = 0x1000,
+		HasVisible = 0x2000,
+		OpaqueBackground = 0x4000
 	}
 }

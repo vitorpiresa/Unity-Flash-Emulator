@@ -1,5 +1,6 @@
 namespace Lab5.Swf.Interfaces
 {
+	using System;
 	using Data;
 
 	public interface ISwfReader
@@ -10,18 +11,14 @@ namespace Lab5.Swf.Interfaces
 		short ReadSI16();
 		int ReadSI24();
 		int ReadSI32();
-		sbyte[] ReadSI8(long n);
-		short[] ReadSI16(long n);
+		long ReadSI64();
 
 		// Unsigned types
 		byte ReadUI8();
 		ushort ReadUI16();
+		uint ReadUI24();
 		uint ReadUI32();
-		byte[] ReadUI8(long n);
-		ushort[] ReadUI16(long n);
-		uint[] ReadUI24(long n);
-		uint[] ReadUI32(long n);
-		ulong[] ReadUI64(long n);
+		ulong ReadUI64();
 
 		// Fixed-point numbers
 		float ReadFIXED();
@@ -36,6 +33,7 @@ namespace Lab5.Swf.Interfaces
 		uint ReadEncodedU32();
 
 		// Bit values
+		void Aling();
 		int ReadSB(long nBits);
 		uint ReadUB(long nBits);
 		float ReadFB(long nBits);
@@ -50,5 +48,8 @@ namespace Lab5.Swf.Interfaces
 		MATRIX ReadMATRIX();
 		CXFORM ReadCXFORM();
 		CXFORM ReadCXFORMWITHALPHA();
+
+		// Misc
+		T[] ReadMany<T>(Func<T> reader, int count);
 	}
 }
