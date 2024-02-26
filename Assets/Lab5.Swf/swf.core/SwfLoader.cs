@@ -8,6 +8,7 @@ using Lab5.Swf.Interfaces;
 using SharpCompress.Compressors;
 using SharpCompress.Compressors.LZMA;
 using SharpCompress.Compressors.Deflate;
+using System.Diagnostics;
 
 namespace Lab5.Swf
 {
@@ -75,12 +76,16 @@ namespace Lab5.Swf
 
 				if (tag is null)
 				{
-					//UnityEngine.Debug.LogWarning($"Unknown tag type: {record.Type}");
+					Log.Warning($"Unknown tag type: {record.Type}.");
 					continue;
 				}
 
-				if (!reader.EndOfStream) { }
-				//UnityEngine.Debug.LogWarning($"Uncomplete tag reading on tag {record.Type} number {index}.");
+				if (!reader.EndOfStream)
+				{
+					Log.Warning($"Uncomplete tag reading on tag {record.Type} number {index}.");
+					if (tag is Tags.FrameLabel)
+						Log.Info(tag);
+				}
 
 				if (tag is IDefinitionTag defineTag)
 					m_Dictionary.Add(defineTag.ID, defineTag);
@@ -120,7 +125,7 @@ namespace Lab5.Swf
 			}
 			catch
 			{
-				//UnityEngine.Debug.Log("Corrupted tag reading");
+				Log.Error("Corrupted tag reading.");
 				return null;
 			}
 		}

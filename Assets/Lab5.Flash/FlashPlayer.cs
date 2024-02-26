@@ -2,6 +2,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using Lab5.Swf;
+using Lab5.Flash;
 
 namespace Lab5.Swf
 {
@@ -12,8 +13,7 @@ namespace Lab5.Swf
 		void Awake()
 		{
 			Application.targetFrameRate = 20;
-			Debug.developerConsoleEnabled = true;
-			Debug.developerConsoleVisible = true; 
+			Log.Logger = new UnityLoggerAdapter(this);
 		}
 
 		void OnMouseUpAsButton() => Load();
@@ -23,9 +23,6 @@ namespace Lab5.Swf
 			var path = Path.Combine(Application.streamingAssetsPath, m_Path);
 			print(m_Path);
 			print(path);
-
-			//ILogger
-			//ILogHandler
 
 			using (var loader = new SwfLoader(path))
 			{

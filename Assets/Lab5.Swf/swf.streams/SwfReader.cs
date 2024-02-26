@@ -52,9 +52,7 @@ namespace Lab5.Swf
 		{
 			unchecked
 			{
-				var b0 = ReadByte();
-				var b1 = ReadByte();
-				return (short)(b0 | b1 << 8);
+				return (short)(ReadByte() | ReadByte() << 8);
 			}
 		}
 
@@ -62,10 +60,7 @@ namespace Lab5.Swf
 		{
 			unchecked
 			{
-				var b0 = ReadByte();
-				var b1 = ReadByte();
-				var b2 = ReadByte();
-				return b0 | b1 << 8 | b2 << 16;
+				return ReadByte() | ReadByte() << 8 | ReadByte() << 16;
 			}
 		}
 
@@ -73,37 +68,17 @@ namespace Lab5.Swf
 		{
 			unchecked
 			{
-				var b0 = ReadByte();
-				var b1 = ReadByte();
-				var b2 = ReadByte();
-				var b3 = ReadByte();
-				return b0 | b1 << 8 | b2 << 16 | b3 << 24;
+				return ReadByte() | ReadByte() << 8 | ReadByte() << 16 | ReadByte() << 24;
 			}
 		}
 
-		public sbyte[] ReadSI8(long n)
+		public long ReadSI64()
 		{
 			unchecked
 			{
-				var value = new sbyte[n];
-				for (long c = 0; c < n; c++)
-					value[c] = (sbyte)ReadByte();
-				return value;
-			}
-		}
-
-		public short[] ReadSI16(long n)
-		{
-			unchecked
-			{
-				var value = new short[n];
-				for (int c = 0; c < n; c++)
-				{
-					var b0 = ReadByte();
-					var b1 = ReadByte();
-					value[c] = (short)(b0 | b1 << 8);
-				}
-				return value;
+				var lo = (uint)(ReadByte() | ReadByte() << 8 | ReadByte() << 16 | ReadByte() << 24);
+				var hi = (uint)(ReadByte() | ReadByte() << 8 | ReadByte() << 16 | ReadByte() << 24);
+				return (long)((ulong)hi << 32 | lo);
 			}
 		}
 
@@ -119,9 +94,7 @@ namespace Lab5.Swf
 		{
 			unchecked
 			{
-				var b0 = ReadByte();
-				var b1 = ReadByte();
-				return (ushort)(b0 | b1 << 8);
+				return (ushort)(ReadByte() | ReadByte() << 8);
 			}
 		}
 
@@ -129,10 +102,7 @@ namespace Lab5.Swf
 		{
 			unchecked
 			{
-				var b0 = ReadByte();
-				var b1 = ReadByte();
-				var b2 = ReadByte();
-				return (uint)(b0 | b1 << 8 | b2 << 16);
+				return (uint)(ReadByte() | ReadByte() << 8 | ReadByte() << 16);
 			}
 		}
 
@@ -140,85 +110,17 @@ namespace Lab5.Swf
 		{
 			unchecked
 			{
-				var b0 = ReadByte();
-				var b1 = ReadByte();
-				var b2 = ReadByte();
-				var b3 = ReadByte();
-				return (uint)(b0 | b1 << 8 | b2 << 16 | b3 << 24);
+				return (uint)(ReadByte() | ReadByte() << 8 | ReadByte() << 16 | ReadByte() << 24);
 			}
 		}
 
-		public byte[] ReadUI8(long n)
+		public ulong ReadUI64()
 		{
 			unchecked
 			{
-				var value = new byte[n];
-				for (long c = 0; c < n; c++)
-					value[c] = ReadByte();
-				return value;
-			}
-		}
-
-		public ushort[] ReadUI16(long n)
-		{
-			unchecked
-			{
-				var value = new ushort[n];
-				for (long c = 0; c < n; c++)
-				{
-					var b0 = ReadByte();
-					var b1 = ReadByte();
-					value[c] = (ushort)(b0 | b1 << 8);
-				}
-				return value;
-			}
-		}
-
-		public uint[] ReadUI24(long n)
-		{
-			unchecked
-			{
-				var value = new uint[n];
-				for (long c = 0; c < n; c++)
-				{
-					var b0 = ReadByte();
-					var b1 = ReadByte();
-					var b2 = ReadByte();
-					value[c] = (uint)(b0 | b1 << 8 | b2 << 16);
-				}
-				return value;
-			}
-		}
-
-		public uint[] ReadUI32(long n)
-		{
-			unchecked
-			{
-				var value = new uint[n];
-				for (int c = 0; c < n; c++)
-				{
-					var b0 = ReadByte();
-					var b1 = ReadByte();
-					var b2 = ReadByte();
-					var b3 = ReadByte();
-					value[c] = (uint)(b0 | b1 << 8 | b2 << 16 | b3 << 24);
-				}
-				return value;
-			}
-		}
-
-		public ulong[] ReadUI64(long n)
-		{
-			unchecked
-			{
-				var value = new ulong[n];
-				for (int c = 0; c < n; c++)
-				{
-					var lo = (uint)(ReadByte() | ReadByte() << 8 | ReadByte() << 16 | ReadByte() << 24);
-					var hi = (uint)(ReadByte() | ReadByte() << 8 | ReadByte() << 16 | ReadByte() << 24);
-					value[c] = ((ulong)hi) << 32 | lo;
-				}
-				return value;
+				var lo = (uint)(ReadByte() | ReadByte() << 8 | ReadByte() << 16 | ReadByte() << 24);
+				var hi = (uint)(ReadByte() | ReadByte() << 8 | ReadByte() << 16 | ReadByte() << 24);
+				return ((ulong)hi) << 32 | lo;
 			}
 		}
 
@@ -227,11 +129,7 @@ namespace Lab5.Swf
 		{
 			unchecked
 			{
-				var b0 = ReadByte();
-				var b1 = ReadByte();
-				var b2 = ReadByte();
-				var b3 = ReadByte();
-				return (b0 | b1 << 8 | b2 << 16 | b3 << 24) / 65536f;
+				return (ReadByte() | ReadByte() << 8 | ReadByte() << 16 | ReadByte() << 24) / 65536f;
 			}
 		}
 
@@ -239,9 +137,7 @@ namespace Lab5.Swf
 		{
 			unchecked
 			{
-				var b0 = ReadByte();
-				var b1 = ReadByte();
-				return (b0 << b1 | 8) / 256f;
+				return (ReadByte() | ReadByte() << 8) / 256f;
 			}
 		}
 
@@ -249,9 +145,7 @@ namespace Lab5.Swf
 		{
 			unchecked
 			{
-				var b0 = ReadByte();
-				var b1 = ReadByte();
-				return HalfUtils.f16tof32((uint)(b0 | b1 << 8));
+				return HalfUtils.f16tof32((uint)(ReadByte() | ReadByte() << 8));
 			}
 		}
 
@@ -259,11 +153,7 @@ namespace Lab5.Swf
 		{
 			unchecked
 			{
-				var b0 = ReadByte();
-				var b1 = ReadByte();
-				var b2 = ReadByte();
-				var b3 = ReadByte();
-				var value = b0 | b1 << 8 | b2 << 16 | b3 << 24;
+				var value = ReadByte() | ReadByte() << 8 | ReadByte() << 16 | ReadByte() << 24;
 				return BitConverter.Int32BitsToSingle(value);
 			}
 		}
@@ -282,69 +172,84 @@ namespace Lab5.Swf
 		// Encoded integers
 		public uint ReadEncodedU32()
 		{
-			uint val = 0;
-			var bt = ReadByte();
-			val |= bt & 0x7fu;
-			if ((bt & 0x80) == 0) return val;
+			unchecked
+			{
+				uint val = 0;
+				var bt = ReadByte();
+				val |= bt & 0x7fu;
+				if ((bt & 0x80) == 0) return val;
 
-			bt = ReadByte();
-			val |= (bt & 0x7fu) << 7;
-			if ((bt & 0x80) == 0) return val;
+				bt = ReadByte();
+				val |= (bt & 0x7fu) << 7;
+				if ((bt & 0x80) == 0) return val;
 
-			bt = ReadByte();
-			val |= (bt & 0x7fu) << 14;
-			if ((bt & 0x80) == 0) return val;
+				bt = ReadByte();
+				val |= (bt & 0x7fu) << 14;
+				if ((bt & 0x80) == 0) return val;
 
-			bt = ReadByte();
-			val |= (bt & 0x7fu) << 21;
-			if ((bt & 0x80) == 0) return val;
+				bt = ReadByte();
+				val |= (bt & 0x7fu) << 21;
+				if ((bt & 0x80) == 0) return val;
 
-			bt = ReadByte();
-			val |= (bt & 0x7fu) << 28;
-			return val;
+				bt = ReadByte();
+				val |= (bt & 0x7fu) << 28;
+				return val;
+			}
 		}
 
 		// Bit values
 		public bool ReadBit()
 		{
-			var bitIndex = m_BitIndex & 0x07;
-			if (bitIndex == 0)
-				m_BitValue = ReadByte();
-			m_BitIndex++;
-			return ((m_BitValue << bitIndex) & 0x80) != 0;
+			unchecked
+			{
+				var bitIndex = m_BitIndex & 0x07;
+				if (bitIndex == 0)
+					m_BitValue = ReadByte();
+				m_BitIndex++;
+				return ((m_BitValue << bitIndex) & 0x80) != 0;
+			}
 		}
 
 		public int ReadSB(long nBits)
 		{
-			if (nBits == 0)
-				return 0;
-			var sign = ReadBit();
-			var res = sign ? uint.MaxValue : 0;
-			nBits--;
-			for (var i = 0; i < nBits; i++)
+			unchecked
 			{
-				var bit = ReadBit();
-				res = (res << 1 | (bit ? 1u : 0u));
+				if (nBits == 0)
+					return 0;
+				var sign = ReadBit();
+				var res = sign ? uint.MaxValue : 0;
+				nBits--;
+				for (var i = 0; i < nBits; i++)
+				{
+					var bit = ReadBit();
+					res = (res << 1 | (bit ? 1u : 0u));
+				}
+				return (int)res;
 			}
-			return (int)res;
 		}
 
 		public uint ReadUB(long nBits)
 		{
-			if (nBits == 0)
-				return 0;
-			var res = 0u;
-			for (var i = 0; i < nBits; i++)
+			unchecked
 			{
-				var bit = ReadBit();
-				res = (res << 1 | (bit ? 1u : 0u));
+				if (nBits == 0)
+					return 0;
+				var res = 0u;
+				for (var i = 0; i < nBits; i++)
+				{
+					var bit = ReadBit();
+					res = res << 1 | (bit ? 1u : 0u);
+				}
+				return res;
 			}
-			return res;
 		}
 
 		public float ReadFB(long nBits)
 		{
-			return ReadSB(nBits) / 65536f;
+			unchecked
+			{
+				return ReadSB(nBits) / 65536f;
+			}
 		}
 
 		// Structured types
@@ -541,6 +446,14 @@ namespace Lab5.Swf
 		{
 			m_BitIndex = 0;
 			m_BitValue = 0;
+		}
+
+		public T[] ReadMany<T>(Func<T> reader, int count)
+		{
+			var array = new T[count];
+			for (int c = 0; c < count; c++)
+				array[c] = reader();
+			return array;
 		}
 	}
 }
